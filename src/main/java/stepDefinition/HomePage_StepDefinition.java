@@ -119,5 +119,17 @@ public class HomePage_StepDefinition extends TestBase {
 	public void Verify_Reports_Page() {
 		homepage.verifyReportsPage();
 	}
+	
+	//Scenario: Verify Calendar Page
+	@Then("User Nevigate to Calendar Page")
+	public void User_Nevigate_to_Calendar_Page() {
+		homepage.calendarPagelnk();
+	}
+
+	@Then("Verify Calendar Page")
+	public void Verify_Calendar_Page() {
+		homepage.verifycalendarPage();
+	}
+	
 
 }

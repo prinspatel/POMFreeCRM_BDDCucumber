@@ -10,6 +10,20 @@ Then title of homepage is "CRMPRO"
 Then User of FreeCRM same as login user
 
 
+Scenario: Verify Calendar Page
+Given user alredy on Homepage
+When title of homepage is "CRMPRO"
+Then User Nevigate to Calendar Page
+Then Verify Calendar Page
+
+
+Scenario: Verify Companies Page
+Given user alredy on Homepage
+When title of homepage is "CRMPRO"
+Then User Nevigate to Companies Page
+Then Verify Companies Page
+
+
 Scenario: Verify Contact page
 Given user alredy on Homepage
 When title of homepage is "CRMPRO"
@@ -31,13 +45,6 @@ Then User Nevigate to Task Page
 Then Verify Task Page
 
 
-Scenario: Verify Companies Page
-Given user alredy on Homepage
-When title of homepage is "CRMPRO"
-Then User Nevigate to Companies Page
-Then Verify Companies Page
-
- 
 Scenario: Verify Cases Page
 Given user alredy on Homepage
 When title of homepage is "CRMPRO"
@@ -64,5 +71,3 @@ Given user alredy on Homepage
 When title of homepage is "CRMPRO"
 Then User Nevigate to Reports Page
 Then Verify Reports Page
-
-

@@ -1,9 +1,12 @@
 package com.qa.pages;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -107,10 +110,24 @@ public class HomePage extends TestBase {
 
 	@FindBy(xpath = "//a[normalize-space()='Reports']")
 	WebElement Reportspagelnk;
-
+	
+	@FindBy(xpath="//a[normalize-space()='Calendar']")
+	WebElement calendarlnk;
+	
+	public void calendarPagelnk() {
+		calendarlnk.click();
+	}
 	public void comaniesPagelnk() {
 		comaniespagelnk.click();
 	}
+	
+	@FindAll({@FindBy(xpath = "//td[@class='calendartitle']")})
+	List<WebElement> v_calendar;
+	
+	public void verifycalendarPage() {
+		Assert.assertTrue(v_calendar.size()>0);
+	}
+
 
 	@FindBy(xpath = "//td[normalize-space()='Companies']")
 	WebElement v_comapnypage;
@@ -162,5 +179,7 @@ public class HomePage extends TestBase {
 	public void verifyReportsPage() {
 		Assert.assertTrue(v_Reports.getText().contains("Reports"));
 	}
+	
+	
 
 }
