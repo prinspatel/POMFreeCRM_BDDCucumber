@@ -16,7 +16,7 @@ Examples:
 | Swift Solutions | IT Services 	| 1200000	 	| 800     	 	| ID012         | https://www.swiftsol.com 		| support@swiftsol.com | +1-555-876-5432 | +1-555-234-5678 |
 | Green Energy 		| Energy   		  | 200000    | 50          | ID345         | https://www.greenenergy.com | info@greenenergy.com | +1-555-678-9012 | +1-555-432-1098 |
 
-@CurrentlyWorking
+
 Scenario Outline: Enter New Company Details
 Given User Nevigate to Homepage
 Then title of homepage is "CRMPRO"

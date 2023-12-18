@@ -5,14 +5,14 @@ import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.qa.utils.TestBase;
+import com.qa.utils.TestUtil;
 
 public class ContactsPage extends TestBase {
 
@@ -59,31 +59,77 @@ public class ContactsPage extends TestBase {
 		}
 	}
 
-	public void createNewContact(String titl, String fname, String surname, String company) {
-		Select select = new Select(driver.findElement(By.name("title")));
-		select.selectByVisibleText(titl);
-		driver.findElement(By.xpath("//input[@id='first_name']")).sendKeys(fname);
-		driver.findElement(By.id("surname")).sendKeys(surname);
-		driver.findElement(By.xpath("//input[@name='client_lookup']")).sendKeys(company);
-		driver.findElement(By.xpath("//input[@value='Save']")).click();
+	@FindBy(xpath = "//a[normalize-space()='New Contact']")
+	WebElement newcontact;
+
+	public void movetonewcontect() {
+		PageFactory.initElements(driver, this);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(contactsLink).build().perform();
+		newcontact.click();
 	}
 
-	public void delateContect() throws InterruptedException {
-		List<WebElement> totaldeals = driver
-				.findElements(By.xpath("//td[@class='datalistrow']//a//i[@title='Delete']"));
-		System.out.println("Total Deals = " + totaldeals.size());
+	@FindBy(xpath = "//legend[normalize-space()='Contact Information']")
+	WebElement newcontactform;
 
-		int b = 0;
-		WebDriverWait wait = new WebDriverWait(driver, 20);
+	public void verifynewContactForn() {
+		Assert.assertTrue(newcontactform.getText().contains("Contact "));
+	}
 
-		for (int i = 1; i <= totaldeals.size(); i++) {
-			System.out.println("Delating Contect, No :" + i);
-			String webelemtn = "(//td[@class='datalistrow']//a//i[@title='Delete'])[1]";
-			WebElement delate = driver.findElement(By.xpath(webelemtn));
-			delate.click();
-			 wait.until(ExpectedConditions.alertIsPresent());
-			driver.switchTo().alert().accept();
-			Thread.sleep(2000);
+	@FindBy(xpath = "//input[@id='first_name']")
+	WebElement fsname;
+
+	@FindBy(xpath = "//input[@id='middle_initial']")
+	WebElement Mname;
+
+	@FindBy(id = "surname")
+	WebElement suname;
+
+	@FindBy(xpath = "//input[@name='client_lookup']")
+	WebElement companyname;
+
+	@FindBy(xpath = "//input[@value='Save']")
+	WebElement savebtn;
+
+	@FindBy(xpath = "//input[@id='company_position']")
+	WebElement possition;
+
+	@FindBy(xpath = "//input[@id='department']")
+	WebElement department;
+
+	public void webElementnewcontact(String Title, String FirstName, String MiddleName, String LastName,
+			String CompanyName, String Possition, String Deparment) {
+		Select select = new Select(driver.findElement(By.name("title")));
+		select.selectByVisibleText(Title);
+
+		fsname.sendKeys(FirstName);
+		Mname.sendKeys(MiddleName);
+		suname.sendKeys(LastName);
+		companyname.sendKeys(CompanyName);
+		possition.sendKeys(Possition);
+		department.sendKeys(Deparment);
+
+		savebtn.click();
+		movetonewcontect();
+
+	}
+
+	public void AddNewContact() throws InterruptedException {
+
+		Object[][] testData = TestUtil.getTestData("NewContact");
+
+		for (Object[] data : testData) {
+
+			String Title = (String) data[0];
+			String FirstName = (String) data[1];
+			String MiddleName = (String) data[2];
+			String LastName = (String) data[3];
+			String CompanyName = (String) data[4];
+			String Possition = (String) data[5];
+			String Deparment = (String) data[6];
+
+			webElementnewcontact(Title, FirstName, MiddleName, LastName, CompanyName, Possition, Deparment);
+
 		}
 
 	}
