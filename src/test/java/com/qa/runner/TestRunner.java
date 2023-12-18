@@ -11,8 +11,8 @@ import io.cucumber.junit.CucumberOptions;
 		glue = "stepDefinition",
 		dryRun = false,
 		monochrome = false,
-		plugin = {"pretty"},
-		tags = "@CurrentlyWorking"
+		plugin = {"pretty","html:Report/cucumber-reports.html"}
+		,tags = "@CurrentlyWorking"
 		)
 
 public class TestRunner {

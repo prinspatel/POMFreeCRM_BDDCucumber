@@ -6,4 +6,3 @@ When title of homepage is "CRMPRO"
 Then User Nevigate to Calendar Page
 Then Verify Calendar Page
 Then Check Calander for selected user
-And Close Browser

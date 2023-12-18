@@ -85,6 +85,9 @@ public class ContactsPage extends TestBase {
 	@FindBy(id = "surname")
 	WebElement suname;
 
+	@FindBy(xpath = "//input[@name='contact_nickname']")
+	WebElement niname;
+
 	@FindBy(xpath = "//input[@name='client_lookup']")
 	WebElement companyname;
 
@@ -131,6 +134,83 @@ public class ContactsPage extends TestBase {
 			webElementnewcontact(Title, FirstName, MiddleName, LastName, CompanyName, Possition, Deparment);
 
 		}
+
+	}
+
+	public boolean savedContacts() {
+		List<WebElement> allcontact = driver.findElements(By.xpath("(//table[@class='datacard'])[3]//tr//td[2]//a"));
+		if (allcontact.size() > 2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@FindBy(xpath = "(//a[normalize-space()='Combined Form'])[2]")
+	WebElement combineform;
+
+	public void movetonewcombineform() {
+		PageFactory.initElements(driver, this);
+		Actions actions = new Actions(driver);
+		actions.moveToElement(contactsLink).build().perform();
+		combineform.click();
+	}
+
+	public void fillCombineContaact(String title, String Firstname, String middlename, String lastname, String nichname,
+			String possitionn, String departmennt) {
+		Select select = new Select(driver.findElement(By.name("title")));
+		select.selectByVisibleText(title);
+
+		fsname.sendKeys(Firstname);
+		Mname.sendKeys(middlename);
+		suname.sendKeys(lastname);
+		niname.sendKeys(nichname);
+		possition.sendKeys(possitionn);
+		department.sendKeys(departmennt);
+
+		savebtn.click();
+	}
+
+	@FindBy(id = "company_name")
+	WebElement CompanyName;
+
+	@FindBy(name = "industry")
+	WebElement Industry;
+
+	@FindBy(id = "annual_revenue")
+	WebElement AnnualR;
+
+	@FindBy(id = "num_of_employees")
+	WebElement Employees;
+
+	@FindBy(name = "company_identifier")
+	WebElement Identifier;
+
+	@FindBy(id = "website")
+	WebElement Website;
+
+	@FindBy(id = "company_email")
+	WebElement Email;
+
+	@FindBy(id = "company_phone")
+	WebElement PhoneNo;
+
+	@FindBy(id = "company_fax")
+	WebElement Fax;
+
+	public void fillCombinecompanie(String company1, String industry1, String annualR1, String employees1,
+			String identifier1, String website1, String email1, String phone, String fax) {
+		PageFactory.initElements(driver, this);
+
+		CompanyName.sendKeys(company1);
+		Industry.sendKeys(industry1);
+		AnnualR.sendKeys(annualR1);
+		Employees.sendKeys(employees1);
+		Identifier.sendKeys(identifier1);
+		PhoneNo.sendKeys(phone);
+		Fax.sendKeys(fax);
+		Website.sendKeys(website1);
+		Email.sendKeys(email1);
 
 	}
 

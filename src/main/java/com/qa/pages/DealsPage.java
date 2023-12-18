@@ -6,10 +6,9 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.qa.utils.TestBase;
 
@@ -41,38 +40,113 @@ public class DealsPage extends TestBase {
 		return newdeal.getAttribute("value");
 	}
 
-	public void addNewDeal(String Dtitle, String Dcompany) throws InterruptedException {
-		WebElement dealslink = driver.findElement(By.xpath("//a[normalize-space()='Deals']"));
+	@FindBy(xpath = "//a[normalize-space()='Deals']")
+	WebElement dealslink;
+
+	@FindBy(xpath = "//a[normalize-space()='New Deal']")
+	WebElement savebtn;
+
+	public void MoveovertoNewDeal() throws InterruptedException {
+		PageFactory.initElements(driver, this);
 		Actions action = new Actions(driver);
 		action.moveToElement(dealslink).build().perform();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//a[normalize-space()='New Deal']")).click();
-
-		driver.findElement(By.id("title")).sendKeys(Dtitle);
-		driver.findElement(By.xpath("//input[@name='client_lookup']")).sendKeys(Dcompany);
-
-		driver.findElement(By.xpath("//input[@value='Save']")).click();
+		savebtn.click();
 	}
 
-	public void deletedeals() throws InterruptedException {
+	@FindBy(xpath = "//input[@name='contact_lookup']")
+	WebElement primerycontct;
 
-		List<WebElement> totaldeals = driver
-				.findElements(By.xpath("//td[@class='datalistrow']//a//i[@title='Delete']"));
-		System.out.println("Total Deals = " + totaldeals.size());
+	@FindBy(xpath = "//input[@id='amount']")
+	WebElement amount;
 
-		int b = 0;
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+	@FindBy(xpath = "//input[@id='probability']")
+	WebElement Probability;
 
-		for (int i = 1; i <= totaldeals.size(); i++) {
-			log.info("Delating Deal No :" + i);
-			String webelemtn = "(//td[@class='datalistrow']//a//i[@title='Delete'])[1]";
-			WebElement delate = driver.findElement(By.xpath(webelemtn));
-			delate.click();
-			 wait.until(ExpectedConditions.alertIsPresent());
-			driver.switchTo().alert().accept();
-			Thread.sleep(2000);
+	@FindBy(xpath = "//input[@name='identifier']")
+	WebElement identifier;
+
+	@FindBy(xpath = "//input[@name='client_lookup']")
+	WebElement companyy;
+
+	public void addNewDeal(String Dtitle, String Dcompany, String pricontact, String Amount, String Prob, String Ide)
+			throws InterruptedException {
+		driver.findElement(By.id("title")).sendKeys(Dtitle);
+		companyy.clear();
+		companyy.sendKeys(Dcompany);
+		primerycontct.sendKeys(pricontact);
+
+		amount.sendKeys(Amount);
+		Probability.sendKeys(Prob);
+		identifier.sendKeys(Ide);
+
+		driver.findElement(By.xpath("//input[@value='Save']")).click();
+
+	}
+
+	@FindBy(xpath = "(//a[normalize-space()='Products'])[1]")
+	WebElement products;
+
+	@FindBy(xpath = "//input[@value='New Product']")
+	WebElement newProduct;
+
+	@FindBy(name = "name")
+	WebElement ProductName;
+
+	@FindBy(id = "cost")
+	WebElement cost;
+
+	@FindBy(id = "retail_value")
+	WebElement retailValue;
+
+	@FindBy(id = "wholesale")
+	WebElement Wholesaleprice;
+
+	@FindBy(id = "sku")
+	WebElement upccode;
+
+	@FindBy(id = "inventory_amount")
+	WebElement inventory_amount;
+
+	public void Moveovertoproducts() throws InterruptedException {
+		PageFactory.initElements(driver, this);
+		Actions action = new Actions(driver);
+		action.moveToElement(dealslink).build().perform();
+		products.click();
+	}
+
+	public void newProduct() {
+		newProduct.click();
+	}
+
+	public void addNewProduct(String productname, String Cost, String RetailValue, String WholesalePrice,
+			String Upccode, String Inventory_Amount) {
+		ProductName.sendKeys(productname);
+		cost.clear();
+		cost.sendKeys(Cost);
+		retailValue.clear();
+		retailValue.sendKeys(RetailValue);
+		Wholesaleprice.clear();
+		Wholesaleprice.sendKeys(WholesalePrice);
+		upccode.clear();
+		upccode.sendKeys(Upccode);
+		inventory_amount.clear();
+		inventory_amount.sendKeys(Inventory_Amount);
+
+		driver.findElement(By.xpath("(//input[@value='Save'])[1]")).click();
+	}
+	
+	@FindAll({@FindBy(xpath="((//table[@align='center']//tbody)[2])//td[1]//a")})
+	List<WebElement> storeproduct;
+	
+	public boolean storedata() {
+		int inventory = 0;
+
+		if(storeproduct.size()>0) {
+			return true;
 		}
-
+		else {
+			return false;
+		}
 	}
 
 }
