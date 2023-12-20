@@ -15,10 +15,12 @@ public class TestUtil extends TestBase {
 	public TestUtil() throws InterruptedException {
 		super();
 	}
-
-	static String DRIVER_PATH = "C:\\QA\\Proejcts\\MaveProject\\POMFreeCrmBDD\\POMFreeCrmBDD\\Drivers\\chromedriver.exe";
-	static String PROPERTIES_PATH = "C:\\QA\\Proejcts\\MaveProject\\POMFreeCrmBDD\\POMFreeCrmBDD\\src\\main\\java\\config\\cofig.properties";
-	static String TESTDATA_SHEET_PATH = "C:\\QA\\Proejcts\\MaveProject\\POMFreeCrmBDD\\POMFreeCrmBDD\\src\\main\\java\\com\\qa\\data\\FreeCRM_Data.xlsx";
+	
+	
+	
+	static String DRIVER_PATH = System.getProperty("user.dir") + "\\Drivers\\chromedriver.exe";
+	static String PROPERTIES_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\config\\cofig.properties";
+	static String TESTDATA_SHEET_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\com\\qa\\data\\FreeCRM_Data.xlsx";
 
 	public static long PAGE_LOAD_TIMEOUT = 20;
 	public static long IMPLICIT_WAIT = 20;
