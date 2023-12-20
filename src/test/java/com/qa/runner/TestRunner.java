@@ -12,7 +12,7 @@ import io.cucumber.junit.CucumberOptions;
 		dryRun = false,
 		monochrome = false,
 		plugin = {"pretty","html:Report/cucumber-reports.html"}
-		,tags = "@CurrentlyWorking"
+		//,tags = "@CurrentlyWorking"
 		)
 
 public class TestRunner {
