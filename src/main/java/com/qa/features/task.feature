@@ -15,7 +15,7 @@ Examples:
 | Title 4 | Deal 4 |  Task Cases 4 | Task Company 4 |
 | Title 5 | Deal 5 |  Task Cases 5 | Task Company 5 |
 
-@CurrentlyWorking
+
 Scenario: Verify new Task
 Given User Nevigate to Homepage
 When title of homepage is "CRMPRO"

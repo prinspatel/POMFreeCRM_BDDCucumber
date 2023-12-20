@@ -1,5 +1,6 @@
 Feature: Free CRM Calander Page Test
 
+@CurrentlyWorking
 Scenario: Display Calander for the Same User who login
 Given User Nevigate to Homepage
 When title of homepage is "CRMPRO"
