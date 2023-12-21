@@ -5,6 +5,7 @@ import com.qa.pages.LoginPage;
 import com.qa.utils.TestBase;
 
 import io.cucumber.java.After;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
@@ -17,8 +18,8 @@ public class Celender_StepDefinition extends TestBase {
 	LoginPage loginpage = new LoginPage();
 	CalanderPage calanderpage = new CalanderPage();
 
-	@Given("User Nevigate to Homepage")
-	public void user_nevigate_to_homepage() throws InterruptedException {
+	@Given("^User nevigate to homepage$")
+	public void user_nevigate_to_homepage() throws PendingException, InterruptedException {
 		initialization();
 		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
 		loginpage.clickloginbtn();
